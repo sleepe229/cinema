@@ -1,8 +1,6 @@
 package org.example.Models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import java.util.Date;
 
 @Entity
@@ -27,7 +25,7 @@ public class Ticket {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id", referencedColumnName = "session_id")
     public SessionFilm getSession() {
         return session;
@@ -37,7 +35,7 @@ public class Ticket {
         this.session = session;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     public User getUser() {
         return user;
@@ -47,7 +45,7 @@ public class Ticket {
         this.user = user;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id", referencedColumnName = "seat_id")
     public Seat getSeat() {
         return seat;

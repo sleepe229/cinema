@@ -30,7 +30,7 @@ public class Auditorium {
         this.capacity = capacity;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cinema_id", referencedColumnName = "cinema_id")
     public Cinema getCinema() {
         return cinema;

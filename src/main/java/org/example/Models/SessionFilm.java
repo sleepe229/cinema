@@ -23,7 +23,7 @@ public class SessionFilm {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auditorium_id", referencedColumnName = "auditorium_id")
     public Auditorium getAuditorium() {
         return auditorium;

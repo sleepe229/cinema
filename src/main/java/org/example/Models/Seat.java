@@ -40,7 +40,7 @@ public class Seat {
         this.numberOfSeat = numberOfSeat;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auditorium_id", referencedColumnName = "auditorium_id")
     public Auditorium getAuditorium() {
         return auditorium;
@@ -50,7 +50,7 @@ public class Seat {
         this.auditorium = auditorium;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id", referencedColumnName = "ticket_id")
     public Ticket getTicket() {
         return ticket;
