@@ -1,8 +1,6 @@
-package org.example.Models;
+package org.example.Entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 import java.util.Date;
 
