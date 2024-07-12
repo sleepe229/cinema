@@ -6,22 +6,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
-public class User {
-    private int id;
+public class User extends BaseEntity {
     private String fullname;
     private String phoneNumber;
     private Date lastBoughtTicket;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected User(){}
 
     @Column(name = "fullname")
     public String getFullname() {

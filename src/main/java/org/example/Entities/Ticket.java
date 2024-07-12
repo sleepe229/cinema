@@ -5,8 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket {
-    private int id;
+public class Ticket extends BaseEntity{
     private SessionFilm session;
     private User user;
     private Seat seat;
@@ -14,19 +13,8 @@ public class Ticket {
     private String status;
     private Date lastTimeChangeStatus;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ticket_id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    protected Ticket(){}
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "session_id", referencedColumnName = "session_id")
     public SessionFilm getSession() {
         return session;
     }
@@ -36,7 +24,6 @@ public class Ticket {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     public User getUser() {
         return user;
     }
@@ -46,7 +33,6 @@ public class Ticket {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seat_id", referencedColumnName = "seat_id")
     public Seat getSeat() {
         return seat;
     }

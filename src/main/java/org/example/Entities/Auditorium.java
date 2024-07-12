@@ -4,22 +4,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "auditorium")
-public class Auditorium {
-    private int id;
+public class Auditorium extends BaseEntity{
     private int capacity;
     private Cinema cinema;
     private String type;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "auditorium_id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected Auditorium(){}
 
     @Column(name = "capacity")
     public int getCapacity() {
@@ -31,7 +21,6 @@ public class Auditorium {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cinema_id", referencedColumnName = "cinema_id")
     public Cinema getCinema() {
         return cinema;
     }

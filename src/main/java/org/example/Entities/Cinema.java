@@ -4,21 +4,11 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cinema")
-public class Cinema {
-    private int id;
+public class Cinema extends BaseEntity{
     private String address;
     private String name;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinema_id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected Cinema(){}
 
     @Column(name = "address")
     public String getAddress() {

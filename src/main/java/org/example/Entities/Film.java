@@ -5,23 +5,14 @@ import java.util.Date;
 
 @Entity
 @Table(name = "film")
-public class Film {
-    private int id;
+public class Film extends BaseEntity {
     private String name;
     private String type;
     private String director;
     private Date dateOfRelease;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "film_id")
-    public int getId() {
-        return id;
-    }
+    protected Film(){}
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Column(name = "name")
     public String getName() {

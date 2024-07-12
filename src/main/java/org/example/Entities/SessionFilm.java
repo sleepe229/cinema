@@ -5,26 +5,16 @@ import java.util.Date;
 
 @Entity
 @Table(name = "session")
-public class SessionFilm {
-    private int id;
+public class SessionFilm extends BaseEntity{
     private Auditorium auditorium;
     private Film film;
     private Date sessionDate;
     private String status;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
-    public int getId() {
-        return id;
-    }
+   protected SessionFilm(){}
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "auditorium_id", referencedColumnName = "auditorium_id")
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -34,7 +24,6 @@ public class SessionFilm {
     }
 
     @ManyToOne
-    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
     public Film getFilm() {
         return film;
     }

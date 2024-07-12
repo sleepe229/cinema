@@ -4,23 +4,13 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "seat")
-public class Seat {
-    private int id;
+public class Seat extends BaseEntity{
     private int numberOfRow;
     private int numberOfSeat;
     private Auditorium auditorium;
     private Ticket ticket;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "seat_id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected Seat(){}
 
     @Column(name = "number_of_row")
     public int getNumberOfRow() {
@@ -41,7 +31,6 @@ public class Seat {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "auditorium_id", referencedColumnName = "auditorium_id")
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -51,7 +40,6 @@ public class Seat {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", referencedColumnName = "ticket_id")
     public Ticket getTicket() {
         return ticket;
     }

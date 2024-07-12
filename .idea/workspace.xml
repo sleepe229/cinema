@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50877846-4423-47bf-89a9-9b16c5a77b43" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/BaseEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Auditorium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/Auditorium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/Cinema.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/Film.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/SessionFilm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/SessionFilm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Entities/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/tpyng/IdeaProjects/cringecoding",
+    "last_opened_file_path": "C:/Users/tpyng/IdeaProjects/theatre",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.36939013"
