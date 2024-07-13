@@ -2,13 +2,15 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "seat")
 public class Seat extends BaseEntity{
     private int numberOfRow;
     private int numberOfSeat;
     private Auditorium auditorium;
-    private Ticket ticket;
+    private Set<Ticket> tickets;
 
     protected Seat(){}
 
@@ -39,12 +41,12 @@ public class Seat extends BaseEntity{
         this.auditorium = auditorium;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    public Ticket getTicket() {
-        return ticket;
+    @OneToMany(fetch = FetchType.LAZY)
+    public Set<Ticket> getTicket() {
+        return tickets;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTicket(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

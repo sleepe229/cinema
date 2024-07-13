@@ -5,27 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50877846-4423-47bf-89a9-9b16c5a77b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/AuditoriumRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/BaseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/CinemaRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/CustomTicketRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/FilmRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/SeatRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/SessionFilmRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/TicketRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/impl/CustomTicketRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/TicketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/impl/TicketServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/ConsoleRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/CustomUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/impl/CustomUserRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/services/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Auditorium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Auditorium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Cinema.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Cinema.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Film.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Seat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/SessionFilm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/SessionFilm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/CustomTicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/CustomTicketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/TicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/TicketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repositories/impl/CustomTicketRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repositories/impl/CustomTicketRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/services/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/services/TicketService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +28,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -62,18 +54,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/tpyng/IdeaProjects/theatre",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.36939013",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tpyng/IdeaProjects/theatre&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.36939013&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

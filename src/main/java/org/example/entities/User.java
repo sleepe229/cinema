@@ -13,6 +13,12 @@ public class User extends BaseEntity {
 
     protected User(){}
 
+    public User(String fullname, String phoneNumber, Date lastBoughtTicket) {
+        this.fullname = fullname;
+        this.phoneNumber = phoneNumber;
+        this.lastBoughtTicket = lastBoughtTicket;
+    }
+
     @Column(name = "fullname")
     public String getFullname() {
         return fullname;
