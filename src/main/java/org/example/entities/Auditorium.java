@@ -9,7 +9,7 @@ public class Auditorium extends BaseEntity{
     private Cinema cinema;
     private String type;
 
-    protected Auditorium(){}
+    public Auditorium(){}
 
     @Column(name = "capacity")
     public int getCapacity() {

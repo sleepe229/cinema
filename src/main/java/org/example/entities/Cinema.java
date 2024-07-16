@@ -8,7 +8,7 @@ public class Cinema extends BaseEntity{
     private String address;
     private String name;
 
-    protected Cinema(){}
+    public Cinema(){}
 
     @Column(name = "address")
     public String getAddress() {

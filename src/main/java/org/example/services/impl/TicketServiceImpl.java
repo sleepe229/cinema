@@ -3,6 +3,7 @@ package org.example.services.impl;
 import org.example.entities.Cinema;
 import org.example.entities.SessionFilm;
 import org.example.entities.Ticket;
+import org.example.entities.User;
 import org.example.repositories.CustomTicketRepository;
 import org.example.repositories.TicketRepository;
 import org.example.services.TicketService;
@@ -42,6 +43,7 @@ public class TicketServiceImpl implements TicketService {
         cTicketRepository.addTicket(ticket);
     }
 
+
     @Override
     @Transactional
     public boolean lockTicket(int ticketId) {
@@ -74,4 +76,23 @@ public class TicketServiceImpl implements TicketService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void discountTicket(User user, int ticketId, float cost){
+        final double FULL_PRICE = 1.0;
+        final double DISCOUNT_25 = 0.75;
+        final double DISCOUNT_50 = 0.5;
+        final double DISCOUNT_75 = 0.25;
+
+        var listTicketsUser = ticketRepository.findAllTicketsByUserWithinDateRange(user, LocalDateTime.now().minusMonths(1),LocalDateTime.now());
+        switch (listTicketsUser.size()){
+            case 0 -> ticketRepository.updateTicketPrice(ticketId, cost * FULL_PRICE);
+            case 1 -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_25);
+            case 2 -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_50);
+            default -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_75);
+        }
+    }
+
+
 }

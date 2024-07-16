@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService {
     private final CustomUserRepository customUserRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-//    private User user = modelMapper.map(userDTO, User.class);
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, CustomUserRepository customUserRepository) {
@@ -32,12 +31,4 @@ public class UserServiceImpl implements UserService {
         customUserRepository.addUser(user);
     }
 
-    @Override
-    public List<User> findAllTicketsByUser(User user) {
-//        return userRepository.findTicketByUser(user)
-//                .stream()
-//                .map((c -> mod));
-        return null;
-    }
-//
 }

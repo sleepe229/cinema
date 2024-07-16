@@ -11,11 +11,12 @@ public class Ticket extends BaseEntity{
     private SessionFilm session;
     private User user;
     private Seat seat;
-    private int cost;
+    private float cost;
     private String status;
     private LocalDateTime lastTimeChangeStatus;
 
-    protected Ticket(){}
+
+    public Ticket(){}
     @ManyToOne(fetch = FetchType.LAZY)
     public SessionFilm getSession() {
         return session;
@@ -46,11 +47,11 @@ public class Ticket extends BaseEntity{
     }
 
     @Column(name = "cost")
-    public int getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 

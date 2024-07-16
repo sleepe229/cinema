@@ -11,7 +11,7 @@ public class SessionFilm extends BaseEntity{
     private Date sessionDate;
     private String status;
 
-   protected SessionFilm(){}
+   public SessionFilm(){}
 
 
     @ManyToOne(fetch = FetchType.LAZY)

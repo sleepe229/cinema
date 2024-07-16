@@ -11,7 +11,7 @@ public class Film extends BaseEntity {
     private String director;
     private Date dateOfRelease;
 
-    protected Film(){}
+    public Film(){}
 
 
     @Column(name = "name")

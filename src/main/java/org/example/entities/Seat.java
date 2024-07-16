@@ -12,7 +12,7 @@ public class Seat extends BaseEntity{
     private Auditorium auditorium;
     private Set<Ticket> tickets;
 
-    protected Seat(){}
+    public Seat(){}
 
     @Column(name = "number_of_row")
     public int getNumberOfRow() {

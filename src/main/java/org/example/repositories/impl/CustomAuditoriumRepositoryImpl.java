@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CustomAuditoriumRepositoryImpl implements CustomAuditoriumRepository {
     @PersistenceContext
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
 
     @Override
