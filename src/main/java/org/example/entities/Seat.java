@@ -33,6 +33,7 @@ public class Seat extends BaseEntity{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -42,6 +43,7 @@ public class Seat extends BaseEntity{
     }
 
     @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
     public Set<Ticket> getTicket() {
         return tickets;
     }

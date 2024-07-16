@@ -21,6 +21,7 @@ public class Auditorium extends BaseEntity{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cinema_id", referencedColumnName = "id")
     public Cinema getCinema() {
         return cinema;
     }

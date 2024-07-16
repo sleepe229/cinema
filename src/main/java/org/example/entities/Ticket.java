@@ -1,6 +1,8 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -11,7 +13,7 @@ public class Ticket extends BaseEntity{
     private Seat seat;
     private int cost;
     private String status;
-    private Date lastTimeChangeStatus;
+    private LocalDateTime lastTimeChangeStatus;
 
     protected Ticket(){}
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,6 +26,7 @@ public class Ticket extends BaseEntity{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     public User getUser() {
         return user;
     }
@@ -33,6 +36,7 @@ public class Ticket extends BaseEntity{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "seat_id", referencedColumnName = "id")
     public Seat getSeat() {
         return seat;
     }
@@ -60,11 +64,11 @@ public class Ticket extends BaseEntity{
     }
 
     @Column(name = "last_time_change_status")
-    public Date getLastTimeChangeStatus() {
+    public LocalDateTime getLastTimeChangeStatus() {
         return lastTimeChangeStatus;
     }
 
-    public void setLastTimeChangeStatus(Date lastTimeChangeStatus) {
+    public void setLastTimeChangeStatus(LocalDateTime lastTimeChangeStatus) {
         this.lastTimeChangeStatus = lastTimeChangeStatus;
     }
 }

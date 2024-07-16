@@ -15,6 +15,7 @@ public class SessionFilm extends BaseEntity{
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -23,7 +24,8 @@ public class SessionFilm extends BaseEntity{
         this.auditorium = auditorium;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", referencedColumnName = "id")
     public Film getFilm() {
         return film;
     }

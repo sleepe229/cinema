@@ -2,16 +2,13 @@ package org.example.repositories.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-import org.example.entities.Cinema;
-import org.example.entities.SessionFilm;
 import org.example.entities.Ticket;
 import org.example.entities.User;
 import org.example.repositories.CustomUserRepository;
 
 import java.util.List;
 
-public class CustomUserRepositoryImpl<T, Integer> implements CustomUserRepository {
+public class CustomUserRepositoryImpl implements CustomUserRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
