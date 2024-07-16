@@ -1,7 +1,5 @@
 package org.example.repositories;
 
-import org.example.entities.Cinema;
-import org.example.entities.SessionFilm;
 import org.example.entities.Ticket;
 import org.example.entities.User;
 

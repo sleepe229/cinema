@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends BaseRepository<Ticket, Integer>, CustomUserRepository {
+public interface UserRepository extends BaseRepository<Ticket, Integer> {
     List<Ticket> findAllByStatus(String status);
 
 }

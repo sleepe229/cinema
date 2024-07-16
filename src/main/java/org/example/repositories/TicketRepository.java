@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TicketRepository extends BaseRepository<Ticket, Integer>{
+public interface TicketRepository extends BaseRepository<Ticket, Integer> {
 
     List<Ticket> findAllByStatus(String status);
-    void addTicket(Ticket distance);
 
-    @Query("SELECT t FROM Ticket t WHERE t.cinema = :cinema AND t.sessionFilm = :sessionFilm")
+    @Query("SELECT t FROM Ticket t WHERE t.session.auditorium.cinema = :cinema AND t.session = :sessionFilm")
     List<Ticket> findAllByCinemaAndSessionFilm(@Param("cinema") Cinema cinema, @Param("sessionFilm") SessionFilm sessionFilm);
+
 
     @Query("SELECT t FROM Ticket t WHERE t.id = :id")
     Optional<Ticket> findById(@Param("id") int id);

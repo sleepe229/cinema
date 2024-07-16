@@ -18,10 +18,12 @@ import java.util.Optional;
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
+    private final CustomTicketRepository cTicketRepository;
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, CustomTicketRepository cTicketRepository) {
         this.ticketRepository = ticketRepository;
+        this.cTicketRepository = cTicketRepository;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional
     public void addTicket(Ticket ticket) {
-        ticketRepository.addTicket(ticket);
+        cTicketRepository.addTicket(ticket);
     }
 
     @Override

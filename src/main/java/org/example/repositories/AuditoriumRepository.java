@@ -1,9 +1,13 @@
-//package org.example.repositories;
-//
-//import org.example.entities.Auditorium;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//@Repository
-//public interface AuditoriumRepository extends JpaRepository<Auditorium, Integer> {
-//}
+package org.example.repositories;
+
+import jakarta.transaction.Transactional;
+import org.example.entities.Auditorium;
+import org.example.entities.Cinema;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface AuditoriumRepository extends BaseRepository<Auditorium, Integer>{
+
+}
