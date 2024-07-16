@@ -1,18 +1,17 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
 @Table(name = "seat")
-public class Seat extends BaseEntity{
+public class Seat extends BaseEntity {
     private int numberOfRow;
     private int numberOfSeat;
     private Auditorium auditorium;
-    private Set<Ticket> tickets;
+    private Set<TicketSeat> ticketSeats;
 
-    public Seat(){}
+    public Seat() {}
 
     @Column(name = "number_of_row")
     public int getNumberOfRow() {
@@ -42,13 +41,12 @@ public class Seat extends BaseEntity{
         this.auditorium = auditorium;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", referencedColumnName = "id")
-    public Set<Ticket> getTicket() {
-        return tickets;
+    @OneToMany(mappedBy = "seat", fetch = FetchType.LAZY)
+    public Set<TicketSeat> getTicketSeats() {
+        return ticketSeats;
     }
 
-    public void setTicket(Set<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setTicketSeats(Set<TicketSeat> ticketSeats) {
+        this.ticketSeats = ticketSeats;
     }
 }

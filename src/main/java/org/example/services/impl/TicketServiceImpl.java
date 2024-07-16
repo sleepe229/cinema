@@ -46,12 +46,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public boolean lockTicket(int ticketId) {
-        Optional<Ticket> optionalTicket = ticketRepository.findById(ticketId);
+    public boolean lockTicket(int id) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(id);
         if (optionalTicket.isPresent()) {
             Ticket ticket = optionalTicket.get();
             if ("AVAILABLE".equals(ticket.getStatus())) {
-                ticketRepository.updateTicketStatus(ticketId, "LOCKED", LocalDateTime.now());
+                ticketRepository.updateTicketStatus(id, "LOCKED", LocalDateTime.now());
                 return true;
             }
         }
@@ -67,19 +67,19 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
-    public void buyTicket(int ticketId) {
-        Optional<Ticket> optionalTicket = ticketRepository.findById(ticketId);
+    public void buyTicket(int id) {
+        Optional<Ticket> optionalTicket = ticketRepository.findById(id);
         if (optionalTicket.isPresent()) {
             Ticket ticket = optionalTicket.get();
             if ("LOCKED".equals(ticket.getStatus())) {
-                ticketRepository.updateTicketStatus(ticketId, "SOLD", LocalDateTime.now());
+                ticketRepository.updateTicketStatus(id, "SOLD", LocalDateTime.now());
             }
         }
     }
 
     @Override
     @Transactional
-    public void discountTicket(User user, int ticketId, float cost){
+    public void discountTicket(User user, int id, float cost){
         final double FULL_PRICE = 1.0;
         final double DISCOUNT_25 = 0.75;
         final double DISCOUNT_50 = 0.5;
@@ -87,10 +87,10 @@ public class TicketServiceImpl implements TicketService {
 
         var listTicketsUser = ticketRepository.findAllTicketsByUserWithinDateRange(user, LocalDateTime.now().minusMonths(1),LocalDateTime.now());
         switch (listTicketsUser.size()){
-            case 0 -> ticketRepository.updateTicketPrice(ticketId, cost * FULL_PRICE);
-            case 1 -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_25);
-            case 2 -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_50);
-            default -> ticketRepository.updateTicketPrice(ticketId, cost * DISCOUNT_75);
+            case 0 -> ticketRepository.updateTicketPrice(id, cost * FULL_PRICE);
+            case 1 -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_25);
+            case 2 -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_50);
+            default -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_75);
         }
     }
 

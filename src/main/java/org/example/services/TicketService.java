@@ -15,11 +15,11 @@ public interface TicketService {
 
     void addTicket(Ticket ticket);
 
-    boolean lockTicket(int ticketId);
+    boolean lockTicket(int id);
 
     void unlockExpiredTickets();
 
     void buyTicket(int ticketId);
 
-    void discountTicket(User user, int ticketId, float cost);
+    void discountTicket(User user, int id, float cost);
 }

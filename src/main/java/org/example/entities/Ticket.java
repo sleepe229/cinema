@@ -1,22 +1,22 @@
 package org.example.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket extends BaseEntity{
+public class Ticket extends BaseEntity {
     private SessionFilm session;
     private User user;
     private Seat seat;
     private float cost;
     private String status;
     private LocalDateTime lastTimeChangeStatus;
+    private Set<TicketSeat> ticketSeats;
 
+    public Ticket() {}
 
-    public Ticket(){}
     @ManyToOne(fetch = FetchType.LAZY)
     public SessionFilm getSession() {
         return session;
@@ -71,5 +71,14 @@ public class Ticket extends BaseEntity{
 
     public void setLastTimeChangeStatus(LocalDateTime lastTimeChangeStatus) {
         this.lastTimeChangeStatus = lastTimeChangeStatus;
+    }
+
+    @OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY)
+    public Set<TicketSeat> getTicketSeats() {
+        return ticketSeats;
+    }
+
+    public void setTicketSeats(Set<TicketSeat> ticketSeats) {
+        this.ticketSeats = ticketSeats;
     }
 }
