@@ -50,4 +50,12 @@ public class CustomSessionRepositoryImpl implements CustomSessionRepository {
                 .getSingleResult();
     }
 
+    @Override
+    public void saveSessionFilm(SessionFilm sessionFilm) {
+        if (sessionFilm.getId() != 0) {
+            entityManager.merge(sessionFilm);
+        } else {
+            entityManager.persist(sessionFilm);
+        }
+    }
 }

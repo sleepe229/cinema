@@ -28,6 +28,15 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     }
 
     @Override
+    public void saveUser(User user) {
+        if (user.getId() != 0) {
+            entityManager.merge(user);
+        } else {
+            entityManager.persist(user);
+        }
+    }
+
+    @Override
     @Transactional
     public boolean existsById(int id) {
         return entityManager.find(User.class, id) != null;

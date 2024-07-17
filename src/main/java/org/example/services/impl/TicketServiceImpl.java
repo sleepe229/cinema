@@ -1,13 +1,11 @@
 package org.example.services.impl;
 
 import org.example.dto.TicketDTO;
-import org.example.dto.UserDTO;
 import org.example.entities.Cinema;
 import org.example.entities.SessionFilm;
 import org.example.entities.Ticket;
 import org.example.entities.User;
-import org.example.repositories.CustomTicketRepository;
-import org.example.repositories.TicketRepository;
+import org.example.repositories.*;
 import org.example.services.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +22,18 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
     private final CustomTicketRepository cTicketRepository;
+    private final CustomSeatRepository customSeatRepository;
+    private final CustomSessionRepository customSessionRepository;
+    private final CustomUserRepository customUserRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository, CustomTicketRepository cTicketRepository, ModelMapper modelMapper) {
+    public TicketServiceImpl(TicketRepository ticketRepository, CustomTicketRepository cTicketRepository, CustomSeatRepository customSeatRepository, CustomSessionRepository customSessionRepository, CustomUserRepository customUserRepository, ModelMapper modelMapper) {
         this.ticketRepository = ticketRepository;
         this.cTicketRepository = cTicketRepository;
+        this.customSeatRepository = customSeatRepository;
+        this.customSessionRepository = customSessionRepository;
+        this.customUserRepository = customUserRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -49,6 +53,18 @@ public class TicketServiceImpl implements TicketService {
     @Transactional
     public void addTicket(TicketDTO ticketDTO) {
         Ticket ticket = modelMapper.map(ticketDTO, Ticket.class);
+
+        if (ticket.getUser() != null) {
+            customUserRepository.saveUser(ticket.getUser());
+        }
+
+        if (ticket.getSeat() != null) {
+            customSeatRepository.save(ticket.getSeat());
+        }
+        if (ticket.getSession() != null) {
+            customSessionRepository.saveSessionFilm(ticket.getSession());
+        }
+
         cTicketRepository.addTicket(ticket);
     }
 
@@ -104,5 +120,4 @@ public class TicketServiceImpl implements TicketService {
             cTicketRepository.save(ticket);
         }
     }
-
 }

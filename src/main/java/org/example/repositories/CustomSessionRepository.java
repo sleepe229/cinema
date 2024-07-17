@@ -11,6 +11,9 @@ public interface CustomSessionRepository {
     void addSession(SessionFilm sessionFilm);
     @Transactional
     void save(SessionFilm sessionFilm);
+
+    @Transactional
+    void saveSessionFilm(SessionFilm sessionFilm);
     @Transactional
     SessionFilm findByAuditoriumIdAndFilmIdAndSessionDate(int auditoriumId, int filmId, LocalDateTime sessionDate);
 

@@ -20,7 +20,6 @@ public class CustomSeatRepositoryImpl implements CustomSeatRepository {
         this.seatRepository = seatRepository;
     }
 
-
     @Override
     public void addSeat(Seat seat) {
         entityManager.persist(seat);
