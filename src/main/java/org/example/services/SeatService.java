@@ -1,7 +1,8 @@
 package org.example.services;
 
+import org.example.dto.SeatDTO;
 import org.example.entities.Seat;
 
 public interface SeatService {
-    void addSeat(Seat seat);
+    Seat addSeat(SeatDTO seat);
 }

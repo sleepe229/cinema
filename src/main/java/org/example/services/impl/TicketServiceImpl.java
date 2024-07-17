@@ -1,5 +1,7 @@
 package org.example.services.impl;
 
+import org.example.dto.TicketDTO;
+import org.example.dto.UserDTO;
 import org.example.entities.Cinema;
 import org.example.entities.SessionFilm;
 import org.example.entities.Ticket;
@@ -7,6 +9,7 @@ import org.example.entities.User;
 import org.example.repositories.CustomTicketRepository;
 import org.example.repositories.TicketRepository;
 import org.example.services.TicketService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,35 +17,40 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
     private final CustomTicketRepository cTicketRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public TicketServiceImpl(TicketRepository ticketRepository, CustomTicketRepository cTicketRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, CustomTicketRepository cTicketRepository, ModelMapper modelMapper) {
         this.ticketRepository = ticketRepository;
         this.cTicketRepository = cTicketRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public List<Ticket> getAllTicketsByStatus(String status) {
-        return ticketRepository.findAllByStatus(status);
+    public List<TicketDTO> getAllTicketsByStatus(String status) {
+        List<Ticket> tickets = ticketRepository.findAllByStatus(status);
+        return tickets.stream().map(ticket -> modelMapper.map(ticket, TicketDTO.class)).collect(Collectors.toList());
     }
 
     @Override
-    public List<Ticket> getAllTicketsByCinemaAndSessionFilm(Cinema cinema, SessionFilm sessionFilm) {
-        return ticketRepository.findAllByCinemaAndSessionFilm(cinema, sessionFilm);
+    public List<TicketDTO> getAllTicketsByCinemaAndSessionFilm(Cinema cinema, SessionFilm sessionFilm) {
+        List<Ticket> tickets = ticketRepository.findAllByCinemaAndSessionFilm(cinema, sessionFilm);
+        return tickets.stream().map(ticket -> modelMapper.map(ticket, TicketDTO.class)).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public void addTicket(Ticket ticket) {
+    public void addTicket(TicketDTO ticketDTO) {
+        Ticket ticket = modelMapper.map(ticketDTO, Ticket.class);
         cTicketRepository.addTicket(ticket);
     }
-
 
     @Override
     @Transactional
@@ -84,15 +92,17 @@ public class TicketServiceImpl implements TicketService {
         final double DISCOUNT_25 = 0.75;
         final double DISCOUNT_50 = 0.5;
         final double DISCOUNT_75 = 0.25;
-
-        var listTicketsUser = ticketRepository.findAllTicketsByUserWithinDateRange(user, LocalDateTime.now().minusMonths(1),LocalDateTime.now());
-        switch (listTicketsUser.size()){
-            case 0 -> ticketRepository.updateTicketPrice(id, cost * FULL_PRICE);
-            case 1 -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_25);
-            case 2 -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_50);
-            default -> ticketRepository.updateTicketPrice(id, cost * DISCOUNT_75);
+        List<Ticket> userTickets = ticketRepository.findByUser(user);
+        Ticket ticket = ticketRepository.findById(id).orElse(null);
+        if(ticket != null) {
+            switch (userTickets.size()) {
+                case 0  -> ticket.setCost((float) (cost * FULL_PRICE));
+                case 1 -> ticket.setCost((float) (cost * DISCOUNT_25));
+                case 2 -> ticket.setCost((float) (cost * DISCOUNT_50));
+                default -> ticket.setCost((float) (cost * DISCOUNT_75));
+            }
+            cTicketRepository.save(ticket);
         }
     }
-
 
 }

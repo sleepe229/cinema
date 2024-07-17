@@ -1,7 +1,8 @@
 package org.example.services;
 
+import org.example.dto.AuditoriumDTO;
 import org.example.entities.Auditorium;
 
 public interface AuditoriumService {
-    void addAuditorium(Auditorium auditorium);
+    Auditorium addAuditorium(AuditoriumDTO auditorium);
 }

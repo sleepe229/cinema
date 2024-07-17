@@ -44,4 +44,5 @@ public interface TicketRepository extends BaseRepository<Ticket, Integer> {
     @Modifying
     @Query("UPDATE Ticket t SET t.cost = :cost where t.id = :id")
     void updateTicketPrice(@Param("id") int id, @Param("cost") double cost);
+
 }

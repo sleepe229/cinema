@@ -3,10 +3,8 @@ package org.example.repositories.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.example.entities.Seat;
-import org.example.entities.SessionFilm;
 import org.example.repositories.CustomSeatRepository;
 import org.example.repositories.SeatRepository;
-import org.example.repositories.SessionFilmRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,5 +24,15 @@ public class CustomSeatRepositoryImpl implements CustomSeatRepository {
     @Override
     public void addSeat(Seat seat) {
         entityManager.persist(seat);
+    }
+
+    @Override
+    @Transactional
+    public void save(Seat seat) {
+        if (seat.getId() != 0) {
+            entityManager.merge(seat);
+        } else {
+            addSeat(seat);
+        }
     }
 }

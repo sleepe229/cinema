@@ -8,7 +8,7 @@ public class TicketSeat extends BaseEntity {
     private Ticket ticket;
     private Seat seat;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "ticket_id", referencedColumnName = "id")
     public Ticket getTicket() {
         return ticket;
@@ -18,7 +18,7 @@ public class TicketSeat extends BaseEntity {
         this.ticket = ticket;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "seat_id", referencedColumnName = "id")
     public Seat getSeat() {
         return seat;

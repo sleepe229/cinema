@@ -31,7 +31,7 @@ public class Seat extends BaseEntity {
         this.numberOfSeat = numberOfSeat;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
     public Auditorium getAuditorium() {
         return auditorium;
@@ -41,7 +41,7 @@ public class Seat extends BaseEntity {
         this.auditorium = auditorium;
     }
 
-    @OneToMany(mappedBy = "seat", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "seat", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     public Set<TicketSeat> getTicketSeats() {
         return ticketSeats;
     }

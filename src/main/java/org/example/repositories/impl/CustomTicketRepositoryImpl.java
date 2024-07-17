@@ -3,9 +3,9 @@ package org.example.repositories.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.example.entities.Ticket;
 import org.example.entities.Cinema;
 import org.example.entities.SessionFilm;
-import org.example.entities.Ticket;
 import org.example.repositories.CustomTicketRepository;
 import org.example.repositories.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +53,15 @@ public class CustomTicketRepositoryImpl implements CustomTicketRepository {
     @Override
     public List<Ticket> findAllLockedTicketsExpired(LocalDateTime currentTime) {
         return ticketRepository.findAllLockedTicketsExpired(currentTime);
+    }
+
+    @Override
+    @Transactional
+    public void save(Ticket ticket) {
+        if (ticket.getId() == 0) {
+            entityManager.persist(ticket);
+        } else {
+            entityManager.merge(ticket);
+        }
     }
 }

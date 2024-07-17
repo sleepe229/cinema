@@ -19,4 +19,14 @@ public class CustomAuditoriumRepositoryImpl implements CustomAuditoriumRepositor
     public void addAuditorium(Auditorium auditorium) {
         entityManager.persist(auditorium);
     }
+
+    @Override
+    @Transactional
+    public void save(Auditorium auditorium) {
+        if (auditorium.getId() != 0) {
+            entityManager.merge(auditorium);
+        } else {
+            addAuditorium(auditorium);
+        }
+    }
 }

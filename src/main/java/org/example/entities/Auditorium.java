@@ -20,7 +20,7 @@ public class Auditorium extends BaseEntity{
         this.capacity = capacity;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "cinema_id", referencedColumnName = "id")
     public Cinema getCinema() {
         return cinema;

@@ -1,10 +1,12 @@
 package org.example;
 
+import org.example.dto.*;
 import org.example.entities.*;
 import org.example.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -34,81 +36,90 @@ public class ConsoleRunner implements CommandLineRunner {
     @Autowired
     private TicketService ticketService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public void run(String... args) throws Exception {
-        // Adding a user
-        User user = new User("John Doe", "123456789", new Date());
-        userService.addUser(user);
+        // Сохраняем пользователя
+        UserDTO userDTO = new UserDTO("John Doe", "123456789", LocalDateTime.now());
+        User savedUser = userService.addUser(userDTO);
+        if (savedUser == null || savedUser.getId() == 0) {
+            System.err.println("Failed to save User");
+            return;
+        }
 
-        // Adding a cinema
-        Cinema cinema = new Cinema();
-        cinema.setAddress("123 Main St");
-        cinema.setName("Main Street Cinema");
-        cinemaService.addCinema(cinema);
+        // Сохраняем кинотеатр и получаем его объект
+        CinemaDTO cinemaDTO = new CinemaDTO();
+        cinemaDTO.setAddress("123 Main St");
+        cinemaDTO.setName("Main Street Cinema");
+        Cinema savedCinema = cinemaService.addCinema(cinemaDTO);
+        if (savedCinema == null || savedCinema.getId() == 0) {
+            System.err.println("Failed to save Cinema");
+            return;
+        }
 
-        // Adding an auditorium
-        Auditorium auditorium = new Auditorium();
-        auditorium.setCapacity(100);
-        auditorium.setCinema(cinema);
-        auditorium.setType("Standard");
-        auditoriumService.addAuditorium(auditorium);
+        // Используем сохраненный объект Cinema для создания Auditorium
+        AuditoriumDTO auditoriumDTO = new AuditoriumDTO();
+        auditoriumDTO.setCapacity(100);
+        auditoriumDTO.setCinemaId(cinemaDTO.getId());
+        auditoriumDTO.setType("Standard");
+        Auditorium savedAuditorium = auditoriumService.addAuditorium(auditoriumDTO);
 
-        // Adding a film
-        Film film = new Film();
-        film.setName("The Great Movie");
-        film.setType("Action");
-        film.setDirector("Jane Doe");
-        film.setDateOfRelease(new Date());
-        filmService.addFilm(film);
+        // Сохраняем фильм
+        FilmDTO filmDTO = new FilmDTO();
+        filmDTO.setName("The Great Movie");
+        filmDTO.setType("Action");
+        filmDTO.setDirector("Jane Doe");
+        filmDTO.setDateOfRelease(new Date());
+        Film savedFilm = filmService.addFilm(filmDTO);
 
-        // Adding a session
-        SessionFilm sessionFilm = new SessionFilm();
-        sessionFilm.setAuditorium(auditorium);
-        sessionFilm.setFilm(film);
-        sessionFilm.setSessionDate(new Date());
-        sessionFilm.setStatus("Scheduled");
-        sessionService.addSession(sessionFilm);
+        // Сохраняем сеанс
+        SessionFilmDTO sessionFilmDTO = new SessionFilmDTO();
+        sessionFilmDTO.setAuditoriumId(auditoriumDTO.getId());
+        sessionFilmDTO.setFilmId(filmDTO.getId());
+        sessionFilmDTO.setSessionDate(new Date());
+        sessionFilmDTO.setStatus("Scheduled");
+        SessionFilm savedSession = sessionService.addSession(sessionFilmDTO);
 
-        // Adding a seat
-        Seat seat = new Seat();
-        seat.setNumberOfRow(1);
-        seat.setNumberOfSeat(1);
-        seat.setAuditorium(auditorium);
-        seatService.addSeat(seat);
+        // Сохраняем место
+        SeatDTO seatDTO = new SeatDTO();
+        seatDTO.setNumberOfRow(1);
+        seatDTO.setNumberOfSeat(1);
+        seatDTO.setAuditoriumId(auditoriumDTO.getId());
+        Seat savedSeat = seatService.addSeat(seatDTO);
 
-        // Adding a ticket
-        Ticket ticket = new Ticket();
-        ticket.setSession(sessionFilm);
-        ticket.setUser(user);
-        ticket.setSeat(seat);
-        ticket.setCost(10.0f);
-        ticket.setStatus("AVAILABLE");
-        ticket.setLastTimeChangeStatus(LocalDateTime.now());
-        ticketService.addTicket(ticket);
+        // Сохраняем билет
+        TicketDTO ticketDTO = new TicketDTO();
+        ticketDTO.setSessionId(sessionFilmDTO.getId());
+        ticketDTO.setUserId(userDTO.getId());
+        ticketDTO.setSeatId(seatDTO.getId());
+        ticketDTO.setCost(10.0f);
+        ticketDTO.setStatus("AVAILABLE");
+        ticketDTO.setLastTimeChangeStatus(LocalDateTime.now());
+        ticketService.addTicket(ticketDTO);
 
-        // Locking a ticket
-        boolean isLocked = ticketService.lockTicket(ticket.getId());
+        // Блокируем билет
+        boolean isLocked = ticketService.lockTicket(ticketDTO.getId());
         if (isLocked) {
             System.out.println("Ticket locked successfully.");
         } else {
             System.out.println("Failed to lock ticket.");
         }
 
-        // Unlocking expired tickets
+        // Разблокируем просроченные билеты и покупаем билет
         ticketService.unlockExpiredTickets();
+        ticketService.buyTicket(ticketDTO.getId());
 
-        // Buying a ticket
-        ticketService.buyTicket(ticket.getId());
+        // Применяем скидку на билет
+        ticketService.discountTicket(savedUser, ticketDTO.getId(), 10.0f);
 
-        // Applying discount to a ticket
-        ticketService.discountTicket(user, ticket.getId(), 10.0f);
-
-        // Recommending films for a user
-        List<Film> recommendedFilms = filmService.recommendFilmsByUserGenres(user);
+        // Рекомендуем фильмы по жанрам пользователя
+        List<FilmDTO> recommendedFilms = filmService.recommendFilmsByUserGenres(savedUser);
         System.out.println("Recommended films: " + recommendedFilms);
 
-        // Fetching all tickets by status
-        List<Ticket> ticketsByStatus = ticketService.getAllTicketsByStatus("SOLD");
+        // Получаем все билеты со статусом "SOLD"
+        List<TicketDTO> ticketsByStatus = ticketService.getAllTicketsByStatus("SOLD");
         System.out.println("Tickets with status 'SOLD': " + ticketsByStatus);
     }
 }

@@ -16,7 +16,6 @@ public class Ticket extends BaseEntity {
     private Set<TicketSeat> ticketSeats;
 
     public Ticket() {}
-
     @ManyToOne(fetch = FetchType.LAZY)
     public SessionFilm getSession() {
         return session;
@@ -73,7 +72,7 @@ public class Ticket extends BaseEntity {
         this.lastTimeChangeStatus = lastTimeChangeStatus;
     }
 
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     public Set<TicketSeat> getTicketSeats() {
         return ticketSeats;
     }

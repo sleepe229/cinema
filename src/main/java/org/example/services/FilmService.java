@@ -1,11 +1,12 @@
 package org.example.services;
 
+import org.example.dto.FilmDTO;
 import org.example.entities.Film;
 import org.example.entities.User;
 
 import java.util.List;
 
 public interface FilmService {
-    void addFilm(Film film);
-    List<Film> recommendFilmsByUserGenres(User user);
+    Film addFilm(FilmDTO film);
+    List<FilmDTO> recommendFilmsByUserGenres(User user);
 }

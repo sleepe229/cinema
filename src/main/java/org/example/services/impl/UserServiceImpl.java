@@ -1,5 +1,7 @@
 package org.example.services.impl;
 
+import org.example.dto.UserDTO;
+import org.example.entities.Cinema;
 import org.example.entities.User;
 import org.example.repositories.CustomUserRepository;
 import org.example.repositories.UserRepository;
@@ -27,8 +29,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addUser(User user) {
-        customUserRepository.addUser(user);
+    public User addUser(UserDTO userDTO) {
+        User user = modelMapper.map(userDTO, User.class);
+        customUserRepository.save(user);
+        System.out.println("User saved with ID: " + user.getId());
+        return user;
     }
-
 }
